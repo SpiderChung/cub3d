@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:13:18 by schung            #+#    #+#             */
-/*   Updated: 2022/09/01 18:48:33 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/01 20:51:09 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	char	*dst;
 
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	ft_putstr_fd(dst, 1);
 	*(unsigned int *)dst = color;
 }
 
@@ -34,4 +33,38 @@ int	my_mlx_pixel_get(t_img *img, int x, int y)
 int	create_rgb(int r, int g, int b)
 {
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
+}
+
+int	get_minimap_color(t_data *data, int x, int y)
+{
+	char	c;
+
+	x = x - 10 + data->p_y;
+	y = y - 10 + data->p_x;
+	if (x < 0 || y < 0 || x >= data->map.rows || y >= data->map.columns)
+		return (0x000000);
+	c = data->map.map[y][x];
+	if (c == '0')
+		return (0xFFFFFF);
+	else if (c == '1' || c == '3')
+		return (0x1390FF);
+	else if (c == ' ' || c == '\0')
+		return (0x0000FF);
+	else
+		return (0x00FF00);
+}
+
+int	get_color(char c)
+{
+	int	color;
+
+	if (c == '0')
+		color = 0xf0f8ff;
+	else if (c == '2')
+		color = 0x00FF00;
+	else if (c == '1' || c == '3')
+		color = 0x1E90FF;
+	else
+		color = 0;
+	return (color);
 }
