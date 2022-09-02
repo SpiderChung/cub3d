@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:50:48 by schung            #+#    #+#             */
-/*   Updated: 2022/09/01 18:00:04 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/02 11:17:29 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	key_press(int keycode, t_data *data)
 		data->point.z--;
 	while (data->point.y < HEIGHT)
 	{
-		my_mlx_pixel_put(data, data->point.x, data->point.y, 0x00FF0000);
+		my_mlx_pixel_put(&data->img, data->point.x, data->point.y, 0x00FF0000);
 		data->point.x = data->point.y/data->point.z;
 		data->point.y++;
 	}

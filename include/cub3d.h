@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/01 20:43:33 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/02 13:00:03 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int		key_press(int keycode, t_data *data);
 
 //  textures.c
 void	get_textures(t_data *data);
-void	get_wall_pixels(t_data *data, int type);
+void	get_wall_pixels(t_img *img, int type);
 
 //	rays.c
 void	set_direction(t_data *data, t_ray *ray);

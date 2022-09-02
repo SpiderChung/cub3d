@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 20:14:51 by schung            #+#    #+#             */
-/*   Updated: 2022/09/01 20:43:47 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/02 11:53:32 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	draw_player(t_data *data, int flag)
 		{
 			if (flag == PARTIAL_MINIMAP)
 				my_mlx_pixel_put(&data->img, (10 * 5) + i,
-					(10 * 5) + j, 0xDC143C);
+					(10 * 50) + j, 0xDC1430);
 			else
 				my_mlx_pixel_put(&data->img, (data->p_y * 5) + i,
-					(data->p_x * 5) + j, 0xDC143C);
+					(data->p_x * 5) + j, 0xDC1430);
 			j++;
 		}
 		i++;

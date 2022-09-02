@@ -6,11 +6,12 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:43:59 by schung            #+#    #+#             */
-/*   Updated: 2022/09/01 20:05:48 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/02 13:55:27 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
 
 int	get_pixel(t_wall *wall, t_img *img, int y)
 {
@@ -54,10 +55,10 @@ void	get_wall(t_data *data)
 
 	wall = &data->wall;
 	line_height = (int)(HEIGHT / data->ray.perp_wall_dist);
-	wall->top = -line_height / 1.5 + HEIGHT / 2 + 0;
+	wall->top = -line_height / 2 + HEIGHT / 2 + 0;
 	if (wall->top < 0)
 		wall->top = 0;
-	wall->bottom = line_height / 1.5 + HEIGHT / 2 + 0;
+	wall->bottom = line_height / 2 + HEIGHT / 2 + 0;
 	if (wall->bottom >= HEIGHT)
 		wall->bottom = HEIGHT - 1;
 	if (data->ray.side == 0)
@@ -69,7 +70,7 @@ void	get_wall(t_data *data)
 	if ((data->ray.side == 0 && data->ray.dir_x > 0)
 		|| (data->ray.side == 1 && data->ray.dir_y < 0))
 		wall->x = SIZE_XPM - wall->x - 1;
-	wall->step = (1.0 * SIZE_XPM / line_height) * 0.75;
+	wall->step = (1.0 * SIZE_XPM / line_height);
 	wall->position
-		= (wall->top - 0 - HEIGHT / 2 + line_height / 1.5) * wall->step;
+		= (wall->top - 0 - HEIGHT / 2 + line_height / 2) * wall->step;
 }

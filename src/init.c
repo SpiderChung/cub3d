@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:13:18 by schung            #+#    #+#             */
-/*   Updated: 2022/09/01 20:51:09 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/02 11:53:53 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	get_minimap_color(t_data *data, int x, int y)
 	x = x - 10 + data->p_y;
 	y = y - 10 + data->p_x;
 	if (x < 0 || y < 0 || x >= data->map.rows || y >= data->map.columns)
-		return (0x000000);
+		return (0x00D49B);
 	c = data->map.map[y][x];
 	if (c == '0')
 		return (0xFFFFFF);
 	else if (c == '1' || c == '3')
-		return (0x1390FF);
+		return (0xD47015);
 	else if (c == ' ' || c == '\0')
 		return (0x0000FF);
 	else
@@ -59,11 +59,11 @@ int	get_color(char c)
 	int	color;
 
 	if (c == '0')
-		color = 0xf0f8ff;
+		color = 0x000000;
 	else if (c == '2')
 		color = 0x00FF00;
 	else if (c == '1' || c == '3')
-		color = 0x1E90FF;
+		color = 0x008000;
 	else
 		color = 0;
 	return (color);
