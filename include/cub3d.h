@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/02 16:07:51 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/03 14:50:08 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@
 #define EXIT_SUCCESS 	0
 #define WIDTH			1024
 #define HEIGHT			512
-
-# define MINIMAP_MAX 1533
-# define PARTIAL_MINIMAP 1
 
 // keycodes
 # define MOVE_LEFT 		0
@@ -181,8 +178,8 @@ void	get_wall(t_data *data);
 void	draw_walls(t_data *data, int x);
 
 //	minimap.c
-void	draw_25px(t_img *img, int x, int y, int color);
-void	draw_player(t_data *data, int flag);
+void	draw_25(t_img *img, int x, int y, int color);
+void	draw_player(t_data *data);
 int		draw_partial_minimap(t_data *data);
 int		draw_minimap(t_data *data);
 
