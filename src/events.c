@@ -32,16 +32,37 @@ int	key_press(int keycode, t_data *data)
 {
 	if (keycode == ESCAPE)
 		exit_game(data, EXIT_SUCCESS);
-	else if (keycode == MOVE_LEFT)
-		data->point.z++;
-	else if (keycode == MOVE_RIGHT)
-		data->point.z--;
-	while (data->point.y < HEIGHT)
+	if (keycode == MOVE_LEFT)
 	{
-		my_mlx_pixel_put(&data->img, data->point.x, data->point.y, 0x00FF0000);
-		data->point.x = data->point.y/data->point.z;
-		data->point.y++;
+		data->p_x += (data->dir_y) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+		data->p_y += (-data->dir_x) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 200, 210);
+	if (keycode == MOVE_RIGHT)
+	{
+		data->p_x += (-data->dir_y) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+		data->p_y += (data->dir_x) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+	}
+	if (keycode == MOVE_UP)
+	{
+		data->p_x += (data->dir_x) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+		data->p_y += (data->dir_y) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+	}
+	if (keycode == MOVE_DOWN)
+	{
+		data->p_x += (-data->dir_x) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+		data->p_y += (-data->dir_y) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+	}
+	if (keycode == ROTATE_RIGHT)
+	{
+		data->dir_x +=
+	}
+
+	// while (data->point.y < HEIGHT)
+	// {
+	// 	my_mlx_pixel_put(&data->img, data->point.x, data->point.y, 0x00FF0000);
+	// 	data->point.x = data->point.y/data->point.z;
+	// 	data->point.y++;
+	// }
+	// mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->img.img_ptr, 200, 210);
 	return (EXIT_SUCCESS);
 }
