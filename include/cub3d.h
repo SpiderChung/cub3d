@@ -28,6 +28,8 @@
 #define EXIT_SUCCESS 	0
 #define WIDTH			1024
 #define HEIGHT			512
+#define SPEEEEEED		0.5
+#define ROTATE_SPEED	-0.06 // in radians
 
 // keycodes
 # define MOVE_LEFT 		0

@@ -30,31 +30,45 @@ int	key_release(int keycode, t_data *data)
 
 int	key_press(int keycode, t_data *data)
 {
+	double len;
+
+
+	len = sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
 	if (keycode == ESCAPE)
 		exit_game(data, EXIT_SUCCESS);
-	if (keycode == MOVE_LEFT)
-	{
-		data->p_x += (data->dir_y) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
-		data->p_y += (-data->dir_x) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
-	}
 	if (keycode == MOVE_RIGHT)
 	{
-		data->p_x += (-data->dir_y) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
-		data->p_y += (data->dir_x) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+		data->p_x += (data->dir_y) / len * SPEEEEEED;
+		data->p_y += (-data->dir_x) / len * SPEEEEEED;
+	}
+	if (keycode == MOVE_LEFT)
+	{
+		data->p_x += (-data->dir_y) / len * SPEEEEEED;
+		data->p_y += (data->dir_x) / len * SPEEEEEED;
 	}
 	if (keycode == MOVE_UP)
 	{
-		data->p_x += (data->dir_x) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
-		data->p_y += (data->dir_y) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+		data->p_x += (data->dir_x) / len * SPEEEEEED;
+		data->p_y += (data->dir_y) / len * SPEEEEEED;
 	}
 	if (keycode == MOVE_DOWN)
 	{
-		data->p_x += (-data->dir_x) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
-		data->p_y += (-data->dir_y) / sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+		data->p_x += (-data->dir_x) / len * SPEEEEEED;
+		data->p_y += (-data->dir_y) / len * SPEEEEEED;
 	}
 	if (keycode == ROTATE_RIGHT)
 	{
-		data->dir_x +=
+		data->dir_x = cos(ROTATE_SPEED) * data->dir_x - sin(ROTATE_SPEED) * data->dir_y;
+		data->dir_y = sin(ROTATE_SPEED) * data->dir_x + cos(ROTATE_SPEED) * data->dir_y;
+		data->dir_x /= len;
+		data->dir_y /= len;
+	}
+	if (keycode == ROTATE_LEFT)
+	{
+		data->dir_x = cos(-ROTATE_SPEED) * data->dir_x - sin(-ROTATE_SPEED) * data->dir_y;
+		data->dir_y = sin(-ROTATE_SPEED) * data->dir_x + cos(-ROTATE_SPEED) * data->dir_y;
+		data->dir_x /= len;
+		data->dir_y /= len;
 	}
 
 	// while (data->point.y < HEIGHT)
