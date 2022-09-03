@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:13:18 by schung            #+#    #+#             */
-/*   Updated: 2022/09/02 16:54:25 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/03 15:00:42 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,6 @@ int	my_mlx_pixel_get(t_img *img, int x, int y)
 int	create_rgb(int r, int g, int b)
 {
 	return (((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff));
-}
-
-int	get_minimap_color(t_data *data, int x, int y)
-{
-	char	c;
-
-	x = x - 10 + data->p_y;
-	y = y - 10 + data->p_x;
-	if (x < 0 || y < 0 || x >= data->map.rows || y >= data->map.columns)
-		return (0x00D49B);
-	c = data->map.map[y][x];
-	if (c == '0')
-		return (0xFFFFFF);
-	else if (c == '1' || c == '3')
-		return (0xD47015);
-	else if (c == ' ' || c == '\0')
-		return (0x0000FF);
-	else
-		return (0x00FF00);
 }
 
 int	get_color(char c)

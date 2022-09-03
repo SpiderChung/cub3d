@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/03 14:50:08 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/03 15:00:51 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,6 @@ int		create_rgb(int r, int g, int b);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		my_mlx_pixel_get(t_img *img, int x, int y);
 int		get_color(char c);
-int		get_minimap_color(t_data *data, int x, int y);
 
 //	draw.c
 int		draw_game(t_data *data);
