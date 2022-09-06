@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:15:22 by schung            #+#    #+#             */
-/*   Updated: 2022/09/02 17:10:20 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/06 23:37:42 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_textures(t_data *data)
 
 	img = &data->img;
 	img->tex_path[east] = ft_strdup("textures/east.xpm");
-	img->tex_path[west] = ft_strdup("textures/west.xpm");
+	img->tex_path[west] = ft_strdup("textures/mossy.xpm");
 	img->tex_path[north] = ft_strdup("textures/north.xpm");
 	img->tex_path[south] = ft_strdup("textures/south.xpm");
 	i = 0;

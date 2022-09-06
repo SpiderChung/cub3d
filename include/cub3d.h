@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/06 22:15:10 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/06 23:48:13 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #define HEIGHT			512
 #define SPEEEEEED		0.5
 #define ROTATE_SPEED	-0.06 // in radians
-#define FOV				0.66
+#define FOV				0.71
 
 // keycodes
 # define MOVE_LEFT 		0
