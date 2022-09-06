@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:18:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/02 17:09:17 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/06 22:13:30 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ int	init_data(t_data *data)
 		exit_game(data, EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
-}
-
-void	set_player_position(t_data *data)
-{
-	data->plane_x = 0.71;
-	data->plane_y = 0;
-	data->dir_x = 0;
-	data->dir_y = 1;
 }
 
 void	start_init(t_data *data)
@@ -117,13 +109,10 @@ int main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (init_data(&data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	data.p_x = 6;
-	data.p_y = 6;
-	set_player_position(&data);
-	data.wall.direction = east;
+	set_player_position(&data, 6, 6, 'S');
 	//mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.img.textures.tex_ptr[east], 0, 0);
 	mlx_loop_hook(data.mlx_ptr, draw_game, &data);
-	//mlx_hook(data.mlx_win, 6, 1L << 0, mouse_hook, &data);
+	mlx_hook(data.mlx_win, 6, 1L << 0, mouse_hook, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
 	//mlx_hook(data.mlx_win, 3, 1L << 0, key_release, &data);
 	mlx_loop(data.mlx_ptr);

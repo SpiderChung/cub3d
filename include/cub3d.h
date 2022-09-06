@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/03 15:00:51 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/06 22:15:10 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 #define EXIT_SUCCESS 	0
 #define WIDTH			1024
 #define HEIGHT			512
+#define SPEEEEEED		0.5
+#define ROTATE_SPEED	-0.06 // in radians
+#define FOV				0.66
 
 // keycodes
 # define MOVE_LEFT 		0
@@ -103,6 +106,8 @@ typedef struct s_wall
 	double	position;
 	int		direction;
 	char	type;
+	int		vertical;
+	int		horizontal;
 }	t_wall;
 
 typedef struct s_map 
@@ -160,6 +165,7 @@ int		draw_game(t_data *data);
 int		exit_game(t_data *data, int exit_state);
 int		key_release(int keycode, t_data *data);
 int		key_press(int keycode, t_data *data);
+int		mouse_hook(int x, int y, t_data *data);
 
 //  textures.c
 int		get_textures(t_data *data);
@@ -181,5 +187,8 @@ void	draw_25(t_img *img, int x, int y, int color);
 void	draw_player(t_data *data);
 int		draw_partial_minimap(t_data *data);
 int		draw_minimap(t_data *data);
+
+// position.c
+int		set_player_position(t_data *data, int x, int y, char c);
 
 #endif

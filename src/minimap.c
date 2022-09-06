@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 20:14:51 by schung            #+#    #+#             */
-/*   Updated: 2022/09/03 14:50:43 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/06 20:21:09 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	draw_player(t_data *data)
 	int	j;
 
 	i = 0;
-	while (i < 3)
+	while (i < 5)
 	{
 		j = -1;
-		while (j < 3)
+		while (j < 5)
 		{
 			my_mlx_pixel_put(&data->img, (data->p_y * 5) + i,
 				(data->p_x * 5) + j, 0xDC1430);

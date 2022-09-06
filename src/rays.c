@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:39:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/01 16:48:43 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/06 21:32:56 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,25 @@ void set_direction(t_data *data, t_ray *ray)
 	{
 		ray->step_x = -1;
 		ray->side_dist_x = (data->p_x - (int)data->p_x) * ray->delta_x;
+		data->wall.vertical = north;
 	}
 	else
 	{
 		ray->step_x = 1;
 		ray->side_dist_x = ((int)data->p_x + 1.0 - data->p_x) * ray->delta_x;
+		data->wall.vertical = south;
 	}
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
 		ray->side_dist_y = (data->p_y - (int)data->p_y) * ray->delta_y;
+		data->wall.horizontal = west;
 	}
 	else
 	{
 		ray->step_y = 1;
 		ray->side_dist_y = ((int)data->p_y + 1.0 - data->p_y) * ray->delta_y;
+		data->wall.horizontal = east;
 	}
 
 }
@@ -83,14 +87,16 @@ double	get_perp_wall_dist(t_data *data)
 	ray = &data->ray;
 	if (ray->side == 0)
 	{
+		data->wall.direction = data->wall.vertical;
 		perp_wall_dist = ray->side_dist_x - ray->delta_x;
 	}
 	else
 	{
+		data->wall.direction = data->wall.horizontal;
 		perp_wall_dist = ray->side_dist_y - ray->delta_y;
 	}
 	// if (perp_wall_dist == 0)
-	// 	perp_wall_dist += 0.01;
+	//  	perp_wall_dist += 0.01;
 	return (perp_wall_dist);
 }
 
