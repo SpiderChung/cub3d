@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:50:48 by schung            #+#    #+#             */
-/*   Updated: 2022/09/06 22:16:44 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/06 22:31:24 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,35 @@ int	key_release(int keycode, t_data *data)
 
 static void	rotation(int keycode, t_data *data, double len)
 {
+	double	old_dir;
+	double	old_plane;
+
 	if (keycode == ROTATE_RIGHT)
 	{
+		old_dir = data->dir_x;
 		data->dir_x = cos(ROTATE_SPEED) * data->dir_x
 			- sin(ROTATE_SPEED) * data->dir_y;
-		data->dir_y = sin(ROTATE_SPEED) * data->dir_x
+		data->dir_y = sin(ROTATE_SPEED) * old_dir
 			+ cos(ROTATE_SPEED) * data->dir_y;
+		old_plane = data->plane_x;
 		data->plane_x = cos(ROTATE_SPEED) * data->plane_x
 			- sin(ROTATE_SPEED) * data->plane_y;
-		data->plane_y = sin(ROTATE_SPEED) * data->plane_x
+		data->plane_y = sin(ROTATE_SPEED) * old_plane
 			+ cos(ROTATE_SPEED) * data->plane_y;
 		data->dir_x /= len;
 		data->dir_y /= len;
 	}
 	if (keycode == ROTATE_LEFT)
 	{
+		old_dir = data->dir_x;
 		data->dir_x = cos(-ROTATE_SPEED) * data->dir_x
 			- sin(-ROTATE_SPEED) * data->dir_y;
-		data->dir_y = sin(-ROTATE_SPEED) * data->dir_x
+		data->dir_y = sin(-ROTATE_SPEED) * old_dir
 			+ cos(-ROTATE_SPEED) * data->dir_y;
+		old_plane = data->plane_x;
 		data->plane_x = cos(-ROTATE_SPEED) * data->plane_x
 			- sin(-ROTATE_SPEED) * data->plane_y;
-		data->plane_y = sin(-ROTATE_SPEED) * data->plane_x
+		data->plane_y = sin(-ROTATE_SPEED) * old_plane
 			+ cos(-ROTATE_SPEED) * data->plane_y;
 		data->dir_x /= len;
 		data->dir_y /= len;
