@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:50:48 by schung            #+#    #+#             */
-/*   Updated: 2022/09/06 23:48:31 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/08 22:18:52 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,7 @@ int	exit_game(t_data *data, int exit_state)
 	exit(EXIT_SUCCESS);
 }
 
-int	key_release(int keycode, t_data *data)
-{
-	if (keycode == ESCAPE)
-		data->controls.escape = -1;
-	return (EXIT_SUCCESS);
-}
-
-static void	rotation(int keycode, t_data *data)
+static void	rotation(int keycode, t_data *data, double len)
 {
 	double	old_dir;
 	double	old_plane;
@@ -45,6 +38,8 @@ static void	rotation(int keycode, t_data *data)
 			- sin(ROTATE_SPEED) * data->plane_y;
 		data->plane_y = sin(ROTATE_SPEED) * old_plane
 			+ cos(ROTATE_SPEED) * data->plane_y;
+		data->dir_x /= len;
+		data->dir_y /= len;
 	}
 	if (keycode == ROTATE_LEFT)
 	{
@@ -58,6 +53,8 @@ static void	rotation(int keycode, t_data *data)
 			- sin(-ROTATE_SPEED) * data->plane_y;
 		data->plane_y = sin(-ROTATE_SPEED) * old_plane
 			+ cos(-ROTATE_SPEED) * data->plane_y;
+		data->dir_x /= len;
+		data->dir_y /= len;
 	}
 }
 
@@ -69,39 +66,97 @@ int	mouse_hook(int x, int y, t_data *data)
 	current = x;
 	(void)y;
 	if (current > previous)
-		key_press(ROTATE_RIGHT, data);
+		redrawing(data, ROTATE_RIGHT);
 	else if (current < previous)
-		key_press(ROTATE_LEFT, data);
+		redrawing(data, ROTATE_LEFT);
 	previous = current;
+	return (EXIT_SUCCESS);
+}
+
+void	redrawing(t_data *data, int keycode)
+{
+	double len;
+
+	len = sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
+	if (keycode == ESCAPE)
+		exit_game(data, EXIT_SUCCESS);
+	if (keycode == MOVE_RIGHT)
+	{
+		data->p_x += (data->dir_y) / len * SPEEEEEED;
+		data->p_y += (-data->dir_x) / len * SPEEEEEED;
+	}
+	if (keycode == MOVE_LEFT)
+	{
+		data->p_x += (-data->dir_y) / len * SPEEEEEED;
+		data->p_y += (data->dir_x) / len * SPEEEEEED;
+	}
+	if (keycode == MOVE_UP)
+	{
+		data->p_x += (data->dir_x) / len * SPEEEEEED;
+		data->p_y += (data->dir_y) / len * SPEEEEEED;
+	}
+	if (keycode == MOVE_DOWN)
+	{
+		data->p_x += (-data->dir_x) / len * SPEEEEEED;
+		data->p_y += (-data->dir_y) / len * SPEEEEEED;
+	}
+	rotation(keycode, data, len);
+}
+
+int	key_release(int key, t_data *data)
+{
+	if (key == MOVE_UP)
+		data->controls.up = -1;
+	else if (key == MOVE_DOWN)
+		data->controls.down = -1;
+	else if (key == MOVE_LEFT)
+		data->controls.left = -1;
+	else if (key == MOVE_RIGHT)
+		data->controls.right = -1;
+	else if (key == ROTATE_LEFT)
+		data->controls.rotate_left = -1;
+	else if (key == ROTATE_RIGHT)
+		data->controls.rotate_right = -1;
+	else if (key == ESCAPE)
+		data->controls.escape = -1;
 	return (EXIT_SUCCESS);
 }
 
 int	key_press(int keycode, t_data *data)
 {
-	if (keycode == ESCAPE)
-		exit_game(data, EXIT_SUCCESS);
-	if (keycode == MOVE_RIGHT)
 	{
-		data->p_x += (data->dir_y) * SPEEEEEED;
-		data->p_y += (-data->dir_x) * SPEEEEEED;
-	}
-	if (keycode == MOVE_LEFT)
-	{
-		data->p_x += (-data->dir_y) * SPEEEEEED;
-		data->p_y += (data->dir_x) * SPEEEEEED;
-	}
 	if (keycode == MOVE_UP)
-	{
-		data->p_x += (data->dir_x) * SPEEEEEED;
-		data->p_y += (data->dir_y) * SPEEEEEED;
-	}
-	if (keycode == MOVE_DOWN)
-	{
-		data->p_x += (-data->dir_x) * SPEEEEEED;
-		data->p_y += (-data->dir_y) * SPEEEEEED;
-	}
-	rotation(keycode, data);
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
-		data->img.img_ptr, 0, 0);
+		data->controls.up = MOVE_UP;
+	else if (keycode == MOVE_DOWN)
+		data->controls.down = MOVE_DOWN;
+	else if (keycode == MOVE_LEFT)
+		data->controls.left = MOVE_LEFT;
+	else if (keycode == MOVE_RIGHT)
+		data->controls.right = MOVE_RIGHT;
+	else if (keycode == ROTATE_LEFT)
+		data->controls.rotate_left = ROTATE_LEFT;
+	else if (keycode == ROTATE_RIGHT)
+		data->controls.rotate_right = ROTATE_RIGHT;
+	else if (keycode == ESCAPE)
+		data->controls.escape = ESCAPE;
 	return (EXIT_SUCCESS);
+}
+}
+
+void	check_events(t_data *data)
+{
+	if (data->controls.down == MOVE_DOWN)
+		redrawing(data, MOVE_DOWN);
+	if (data->controls.up == MOVE_UP)
+		redrawing(data, MOVE_UP);
+	if (data->controls.left == MOVE_LEFT)
+		redrawing(data, MOVE_LEFT);
+	if (data->controls.right == MOVE_RIGHT)
+		redrawing(data, MOVE_RIGHT);
+	if (data->controls.rotate_left == ROTATE_LEFT)
+		redrawing(data, ROTATE_LEFT);
+	if (data->controls.rotate_right == ROTATE_RIGHT)
+		redrawing(data, ROTATE_RIGHT);
+	if (data->controls.escape == ESCAPE)
+		redrawing(data, ESCAPE);
 }

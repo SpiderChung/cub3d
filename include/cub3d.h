@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/06 23:48:13 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/08 22:46:08 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,21 @@
 #define EXIT_SUCCESS 	0
 #define WIDTH			1024
 #define HEIGHT			512
-#define SPEEEEEED		0.5
-#define ROTATE_SPEED	-0.06 // in radians
-#define FOV				0.71
+#define SPEEEEEED		0.05
+#define ROTATE_SPEED	-0.03 // in radians
+#define FOV				0.66
+#define SIZE_XPM 		64
+#define WALL_DISTANCE 	0.3
 
 // keycodes
-# define MOVE_LEFT 		0
-# define MOVE_RIGHT 	2
-# define MOVE_DOWN 		1
-# define MOVE_UP 		13
-# define ROTATE_LEFT 	123
-# define ROTATE_RIGHT 	124
-# define ESCAPE 		53
-# define SIZE_XPM 		64
+#define MOVE_LEFT 		0
+#define MOVE_RIGHT 		2
+#define MOVE_DOWN 		1
+#define MOVE_UP 		13
+#define ROTATE_LEFT 	123
+#define ROTATE_RIGHT 	124
+#define ESCAPE 			53
+
 
 typedef struct s_ray
 {
@@ -56,13 +58,6 @@ typedef struct s_ray
 	int		side;
 	double	perp_wall_dist;
 }	t_ray;
-
-typedef struct s_point 
-{
-	int	x;
-	int	y;
-	int z;
-} t_point;
 
 typedef struct s_textures
 {
@@ -85,6 +80,18 @@ typedef enum e_tex
 	door = 4,
 
 }	t_tex;
+
+typedef struct s_cnt
+{
+	int move_up;
+	int move_down;
+	int move_left;
+	int move_right;
+	int rotate_left;
+	int rotate_right;
+	int escape;
+
+} t_cnt;
 
 typedef struct s_controls
 {
@@ -147,9 +154,9 @@ typedef	struct s_data
 	t_controls	controls;
 	t_map		map;
 	t_img		img;
-	t_point		point;
 	t_ray		ray;
 	t_wall		wall;
+	t_cnt		cnt;
 } t_data;
 
 //  init.c
@@ -160,12 +167,14 @@ int		get_color(char c);
 
 //	draw.c
 int		draw_game(t_data *data);
+void	check_events(t_data *data);
 
 //  events.c
 int		exit_game(t_data *data, int exit_state);
 int		key_release(int keycode, t_data *data);
 int		key_press(int keycode, t_data *data);
 int		mouse_hook(int x, int y, t_data *data);
+void	redrawing(t_data *data, int keycode);
 
 //  textures.c
 int		get_textures(t_data *data);

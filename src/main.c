@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:18:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/06 22:13:30 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/08 22:41:46 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,13 @@ int main(int argc, char **argv)
  	}
 	data.map.columns = 20;
 	data.map.rows = 20;
+	data.cnt.escape = ESCAPE;
+	data.cnt.move_down = MOVE_DOWN;
+	data.cnt.move_left = MOVE_LEFT;
+	data.cnt.move_right = MOVE_RIGHT;
+	data.cnt.rotate_left = ROTATE_LEFT;
+	data.cnt.rotate_right = ROTATE_RIGHT;
+	data.cnt.move_up = MOVE_UP;
 	// i = 0;
 	// int j;
 	// while (i < SIZE_XPM) 
@@ -103,18 +110,26 @@ int main(int argc, char **argv)
 	// 	ft_putstr_fd("\n", 1);
 	// 	i++;
 	// }
+	int *ptr = (int*)&data.cnt;
+	i = 0;
+	while (i < 7)
+	{
+		printf("%d\n", *(ptr + i));
+		i++;
+	}
 	if (!argv)
 		printf("Hello");
 	if (argc != 2 && write(2, "Wrong number of arguments!\n", 28))
 		return (EXIT_FAILURE);
 	if (init_data(&data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	ft_memset(&data.controls, -1, sizeof(t_controls));
 	set_player_position(&data, 6, 6, 'S');
-	//mlx_put_image_to_window(data.mlx_ptr, data.mlx_win, data.img.textures.tex_ptr[east], 0, 0);
 	mlx_loop_hook(data.mlx_ptr, draw_game, &data);
 	mlx_hook(data.mlx_win, 6, 1L << 0, mouse_hook, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
-	//mlx_hook(data.mlx_win, 3, 1L << 0, key_release, &data);
+	mlx_hook(data.mlx_win, 3, 1L << 0, key_release, &data);
 	mlx_loop(data.mlx_ptr);
+	mlx_destroy_image(data.mlx_ptr, data.img.img_ptr);
 	exit(EXIT_SUCCESS);
 }

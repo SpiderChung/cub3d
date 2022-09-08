@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:45:00 by schung            #+#    #+#             */
-/*   Updated: 2022/09/02 14:25:19 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/08 21:09:53 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int draw_game(t_data *data)
 	int x;
 
 	x = 0;
+	check_events(data);
 	usleep(3750);
 	while (x < WIDTH)
 	{
@@ -69,6 +70,6 @@ int draw_game(t_data *data)
 	draw_minimap(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img.img_ptr, 0, 0);
-	// mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
+	//mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	return (EXIT_SUCCESS);
 }
