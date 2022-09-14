@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:50:48 by schung            #+#    #+#             */
-/*   Updated: 2022/09/08 22:18:52 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/09 00:10:02 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,18 +145,30 @@ int	key_press(int keycode, t_data *data)
 
 void	check_events(t_data *data)
 {
-	if (data->controls.down == MOVE_DOWN)
-		redrawing(data, MOVE_DOWN);
-	if (data->controls.up == MOVE_UP)
-		redrawing(data, MOVE_UP);
-	if (data->controls.left == MOVE_LEFT)
-		redrawing(data, MOVE_LEFT);
-	if (data->controls.right == MOVE_RIGHT)
-		redrawing(data, MOVE_RIGHT);
-	if (data->controls.rotate_left == ROTATE_LEFT)
-		redrawing(data, ROTATE_LEFT);
-	if (data->controls.rotate_right == ROTATE_RIGHT)
-		redrawing(data, ROTATE_RIGHT);
-	if (data->controls.escape == ESCAPE)
-		redrawing(data, ESCAPE);
+	int	*ptr;
+	int	i;
+
+	ptr = (int *)&data->controls;
+	i = 0;
+	while (i < 7)
+	{
+		if (*(ptr + i) > -1)
+			redrawing(data, *(ptr + i));
+		i++;
+	}
+
+	// if (data->controls.down == MOVE_DOWN)
+	// 	redrawing(data, MOVE_DOWN);
+	// if (data->controls.up == MOVE_UP)
+	// 	redrawing(data, MOVE_UP);
+	// if (data->controls.left == MOVE_LEFT)
+	// 	redrawing(data, MOVE_LEFT);
+	// if (data->controls.right == MOVE_RIGHT)
+	// 	redrawing(data, MOVE_RIGHT);
+	// if (data->controls.rotate_left == ROTATE_LEFT)
+	// 	redrawing(data, ROTATE_LEFT);
+	// if (data->controls.rotate_right == ROTATE_RIGHT)
+	// 	redrawing(data, ROTATE_RIGHT);
+	// if (data->controls.escape == ESCAPE)
+	// 	redrawing(data, ESCAPE);
 }

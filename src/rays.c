@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:39:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/06 21:32:56 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/13 22:47:00 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ double	get_perp_wall_dist(t_data *data)
 		data->wall.direction = data->wall.horizontal;
 		perp_wall_dist = ray->side_dist_y - ray->delta_y;
 	}
-	// if (perp_wall_dist == 0)
-	//  	perp_wall_dist += 0.01;
+	if (perp_wall_dist == 0)
+	  	perp_wall_dist += 0.01;
 	return (perp_wall_dist);
 }
 

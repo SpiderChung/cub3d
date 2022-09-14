@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/08 22:46:08 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/13 22:25:11 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define EXIT_SUCCESS 	0
 #define WIDTH			1024
 #define HEIGHT			512
-#define SPEEEEEED		0.05
+#define SPEEEEEED		0.03
 #define ROTATE_SPEED	-0.03 // in radians
 #define FOV				0.66
 #define SIZE_XPM 		64
@@ -68,6 +68,7 @@ typedef struct s_textures
 	int		doors[SIZE_XPM][SIZE_XPM];
 	void	*tex_ptr[5];
 	char	*tex_addr;
+	void	*shotgun;
 }	t_textures;
 
 
@@ -78,18 +79,19 @@ typedef enum e_tex
 	west = 2,
 	south = 3,
 	door = 4,
+	shotgun = 5,
 
 }	t_tex;
 
-typedef struct s_cnt
+typedef enum s_cnt
 {
-	int move_up;
-	int move_down;
-	int move_left;
-	int move_right;
-	int rotate_left;
-	int rotate_right;
-	int escape;
+	move_up = 13,
+	move_down = 1,
+	move_left = 0,
+	move_right = 2,
+	rotate_left = 123,
+	rotate_right = 124,
+	escape = 53,
 
 } t_cnt;
 
@@ -135,7 +137,7 @@ typedef struct s_img
 	int			endian;
 	int			floor[3];
 	int			ceiling[3];
-	char		*tex_path[5];
+	char		*tex_path[6];
 	t_textures	textures;
 } t_img;
 
@@ -199,5 +201,8 @@ int		draw_minimap(t_data *data);
 
 // position.c
 int		set_player_position(t_data *data, int x, int y, char c);
+
+// draw_shotgun.c
+void    draw_shotgun(t_data *data);
 
 #endif
