@@ -6,7 +6,7 @@
 #    By: schung <schung@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 15:54:32 by tblaase           #+#    #+#              #
-#    Updated: 2022/08/27 17:09:30 by schung           ###   ########.fr        #
+#    Updated: 2022/09/14 19:02:47 by schung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ LIBMLX_DIR	=	mlx/
 
 SRC_FILES	=	${shell find ./src -name "*.c"}
 OBJ_FILES	=	$(patsubst %.c,%.o, $(notdir $(SRC_FILES)))
+INC_FILES	= 	$(addprefix $(LIBFT_DIR), cub3d.h)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))

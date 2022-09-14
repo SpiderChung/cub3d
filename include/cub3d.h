@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/13 22:25:11 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/14 18:59:07 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,24 @@
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
-#define EXIT_FAILURE 	1
-#define EXIT_SUCCESS 	0
-#define WIDTH			1024
-#define HEIGHT			512
-#define SPEEEEEED		0.03
-#define ROTATE_SPEED	-0.03 // in radians
-#define FOV				0.66
-#define SIZE_XPM 		64
-#define WALL_DISTANCE 	0.3
+# define EXIT_FAILURE 	1
+# define EXIT_SUCCESS 	0
+# define WIDTH			1024
+# define HEIGHT			512
+# define SPEED			0.03
+# define ROTATE_SPEED	-0.03 // in radians
+# define FOV				0.66
+# define SIZE_XPM 		64
+# define WALL_DISTANCE 	0.5
 
 // keycodes
-#define MOVE_LEFT 		0
-#define MOVE_RIGHT 		2
-#define MOVE_DOWN 		1
-#define MOVE_UP 		13
-#define ROTATE_LEFT 	123
-#define ROTATE_RIGHT 	124
-#define ESCAPE 			53
-
+# define MOVE_LEFT 		0
+# define MOVE_RIGHT 		2
+# define MOVE_DOWN 		1
+# define MOVE_UP 		13
+# define ROTATE_LEFT 	123
+# define ROTATE_RIGHT 	124
+# define ESCAPE 			53
 
 typedef struct s_ray
 {
@@ -71,7 +70,6 @@ typedef struct s_textures
 	void	*shotgun;
 }	t_textures;
 
-
 typedef enum e_tex
 {
 	north = 0,
@@ -80,7 +78,6 @@ typedef enum e_tex
 	south = 3,
 	door = 4,
 	shotgun = 5,
-
 }	t_tex;
 
 typedef enum s_cnt
@@ -92,8 +89,7 @@ typedef enum s_cnt
 	rotate_left = 123,
 	rotate_right = 124,
 	escape = 53,
-
-} t_cnt;
+}	t_cnt;
 
 typedef struct s_controls
 {
@@ -119,12 +115,12 @@ typedef struct s_wall
 	int		horizontal;
 }	t_wall;
 
-typedef struct s_map 
+typedef struct s_map
 {
-	int 	columns;
+	int		columns;
 	int		rows;
 	char	**map;
-} t_map;
+}	t_map;
 
 typedef struct s_img
 {
@@ -139,9 +135,9 @@ typedef struct s_img
 	int			ceiling[3];
 	char		*tex_path[6];
 	t_textures	textures;
-} t_img;
+}	t_img;
 
-typedef	struct s_data
+typedef struct s_data
 {
 	float		p_x;
 	float		p_y;
@@ -159,13 +155,10 @@ typedef	struct s_data
 	t_ray		ray;
 	t_wall		wall;
 	t_cnt		cnt;
-} t_data;
+}	t_data;
 
-//  init.c
-int		create_rgb(int r, int g, int b);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-int		my_mlx_pixel_get(t_img *img, int x, int y);
-int		get_color(char c);
+//	draw_shotgun.c
+void	draw_shotgun(t_data *data);
 
 //	draw.c
 int		draw_game(t_data *data);
@@ -178,9 +171,20 @@ int		key_press(int keycode, t_data *data);
 int		mouse_hook(int x, int y, t_data *data);
 void	redrawing(t_data *data, int keycode);
 
-//  textures.c
-int		get_textures(t_data *data);
-void	get_wall_pixels(t_img *img, int type);
+//  init.c
+int		create_rgb(int r, int g, int b);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+int		my_mlx_pixel_get(t_img *img, int x, int y);
+int		get_color(char c);
+
+//	minimap.c
+void	draw_25(t_img *img, int x, int y, int color);
+void	draw_player(t_data *data);
+int		draw_partial_minimap(t_data *data);
+int		draw_minimap(t_data *data);
+
+//	position.c
+int		set_player_position(t_data *data, int x, int y, char c);
 
 //	rays.c
 void	set_direction(t_data *data, t_ray *ray);
@@ -189,20 +193,22 @@ void	searching_wall(t_data *data, t_ray *ray, int p_x);
 double	get_perp_wall_dist(t_data *data);
 int		get_ray(t_data *data, int x);
 
+//  textures.c
+int		get_textures(t_data *data);
+void	get_wall_pixels(t_img *img, int type);
+
+//	wall_collision.c
+int		wall_in_front_x(t_data *data, double len);
+int		wall_in_front_y(t_data *data, double len);
+int		wall_behind_x(t_data *data, double len);
+int		wall_behind_y(t_data *data, double len);
+int 	wall_left_x(t_data *data, double len);
+int 	wall_left_y(t_data *data, double len);
+int 	wall_right_x(t_data *data, double len);
+int		wall_right_y(t_data *data, double len);
+
 //	wall.c
 void	get_wall(t_data *data);
 void	draw_walls(t_data *data, int x);
-
-//	minimap.c
-void	draw_25(t_img *img, int x, int y, int color);
-void	draw_player(t_data *data);
-int		draw_partial_minimap(t_data *data);
-int		draw_minimap(t_data *data);
-
-// position.c
-int		set_player_position(t_data *data, int x, int y, char c);
-
-// draw_shotgun.c
-void    draw_shotgun(t_data *data);
 
 #endif

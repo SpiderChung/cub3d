@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:50:48 by schung            #+#    #+#             */
-/*   Updated: 2022/09/09 00:10:02 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/14 18:56:13 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,23 +82,31 @@ void	redrawing(t_data *data, int keycode)
 		exit_game(data, EXIT_SUCCESS);
 	if (keycode == MOVE_RIGHT)
 	{
-		data->p_x += (data->dir_y) / len * SPEEEEEED;
-		data->p_y += (-data->dir_x) / len * SPEEEEEED;
+		if (wall_right_x(data, len) == false)
+			data->p_x += (data->dir_y) / len * SPEED;
+		if (wall_right_y(data, len) == false)
+			data->p_y += (-data->dir_x) / len * SPEED;
 	}
 	if (keycode == MOVE_LEFT)
 	{
-		data->p_x += (-data->dir_y) / len * SPEEEEEED;
-		data->p_y += (data->dir_x) / len * SPEEEEEED;
+		if (wall_left_x(data, len) == false)
+			data->p_x += (-data->dir_y) / len * SPEED;
+		if (wall_left_y(data, len) == false)
+			data->p_y += (data->dir_x) / len * SPEED;
 	}
 	if (keycode == MOVE_UP)
 	{
-		data->p_x += (data->dir_x) / len * SPEEEEEED;
-		data->p_y += (data->dir_y) / len * SPEEEEEED;
+		if (wall_in_front_x(data, len) == false)
+			data->p_x += (data->dir_x) / len * SPEED;
+		if (wall_in_front_y(data, len) == false)
+			data->p_y += (data->dir_y) / len * SPEED;
 	}
 	if (keycode == MOVE_DOWN)
 	{
-		data->p_x += (-data->dir_x) / len * SPEEEEEED;
-		data->p_y += (-data->dir_y) / len * SPEEEEEED;
+		if (wall_behind_x(data, len) == false)
+			data->p_x += (-data->dir_x) / len * SPEED;
+		if (wall_behind_y(data, len) == false)
+			data->p_y += (-data->dir_y) / len * SPEED;
 	}
 	rotation(keycode, data, len);
 }

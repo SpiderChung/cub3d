@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:18:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/14 00:52:17 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/14 17:37:31 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	init_data(t_data *data)
 		ft_putstr_fd("Failure of creating image pointer\n", 2);
 		exit_game(data, EXIT_FAILURE);
 	}
-	get_textures(data);
+	if (get_textures(data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bits_per_pixel,
 			&data->img.line_length, &data->img.endian);
 	if (data->img.addr == NULL)

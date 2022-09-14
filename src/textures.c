@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:15:22 by schung            #+#    #+#             */
-/*   Updated: 2022/09/14 01:40:10 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/14 18:22:15 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,11 @@ int	get_textures(t_data *data)
 		img->textures.tex_ptr[i] = mlx_xpm_file_to_image(data->mlx_ptr,
 				data->img.tex_path[i], &width, &height);
 		if (data->img.textures.tex_ptr[i] == NULL)
-			ft_putstr_fd("Failure of memory allocation\n", 2);
+		{
+			ft_putstr_fd(data->img.tex_path[i], 2);
+			ft_putstr_fd(" : Failure of memory allocation\n", 2);
+			return (EXIT_FAILURE);
+		}
 		img->textures.tex_addr = mlx_get_data_addr(img->textures.tex_ptr[i],
 				&img->bits_per_pixel, &img->line_length, &img->endian);
 		if (img->textures.tex_addr == NULL)
@@ -46,6 +50,12 @@ int	get_textures(t_data *data)
 	}
 	img->textures.shotgun = mlx_xpm_file_to_image(data->mlx_ptr,
 			data->img.tex_path[shotgun], &width, &height);
+	if (img->textures.shotgun == NULL)
+	{		
+		ft_putstr_fd(data->img.tex_path[i], 2);
+		ft_putstr_fd(" : Failure of memory allocation\n", 2);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
