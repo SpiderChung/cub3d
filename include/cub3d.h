@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/14 18:59:07 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/15 03:10:26 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@
 # define HEIGHT			512
 # define SPEED			0.03
 # define ROTATE_SPEED	-0.03 // in radians
-# define FOV				0.66
+# define FOV			0.66
 # define SIZE_XPM 		64
-# define WALL_DISTANCE 	0.5
+# define WALL_DISTANCE 	0.3
+# define CORNER			0.25
 
 // keycodes
 # define MOVE_LEFT 		0
@@ -122,6 +123,18 @@ typedef struct s_map
 	char	**map;
 }	t_map;
 
+typedef struct s_door
+{
+	bool	door;
+	int		open_vert[2];
+	int		open_hor[2];
+	double	dir_x;
+	double	dir_y;
+	int		x;
+	int		side;
+	double	perp_wall_dist;
+}	t_door;
+
 typedef struct s_img
 {
 	void		*img_ptr;
@@ -154,8 +167,17 @@ typedef struct s_data
 	t_img		img;
 	t_ray		ray;
 	t_wall		wall;
+	t_door		door;
 	t_cnt		cnt;
 }	t_data;
+
+//	doors.c
+void	draw_doors(t_data *data, int x);
+void	set_door_data(t_data *data, int x);
+int		open_vert_door(t_data *data);
+int		close_vert_door(t_data *data);
+int		open_horizone_door(t_data *data);
+int		close_horizone_door(t_data *data);
 
 //	draw_shotgun.c
 void	draw_shotgun(t_data *data);
@@ -202,9 +224,9 @@ int		wall_in_front_x(t_data *data, double len);
 int		wall_in_front_y(t_data *data, double len);
 int		wall_behind_x(t_data *data, double len);
 int		wall_behind_y(t_data *data, double len);
-int 	wall_left_x(t_data *data, double len);
-int 	wall_left_y(t_data *data, double len);
-int 	wall_right_x(t_data *data, double len);
+int		wall_left_x(t_data *data, double len);
+int		wall_left_y(t_data *data, double len);
+int		wall_right_x(t_data *data, double len);
 int		wall_right_y(t_data *data, double len);
 
 //	wall.c

@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:50:48 by schung            #+#    #+#             */
-/*   Updated: 2022/09/14 18:56:13 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/15 03:25:28 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int	key_release(int key, t_data *data)
 
 int	key_press(int keycode, t_data *data)
 {
-	{
+
 	if (keycode == MOVE_UP)
 		data->controls.up = MOVE_UP;
 	else if (keycode == MOVE_DOWN)
@@ -149,7 +149,6 @@ int	key_press(int keycode, t_data *data)
 		data->controls.escape = ESCAPE;
 	return (EXIT_SUCCESS);
 }
-}
 
 void	check_events(t_data *data)
 {
@@ -164,19 +163,4 @@ void	check_events(t_data *data)
 			redrawing(data, *(ptr + i));
 		i++;
 	}
-
-	// if (data->controls.down == MOVE_DOWN)
-	// 	redrawing(data, MOVE_DOWN);
-	// if (data->controls.up == MOVE_UP)
-	// 	redrawing(data, MOVE_UP);
-	// if (data->controls.left == MOVE_LEFT)
-	// 	redrawing(data, MOVE_LEFT);
-	// if (data->controls.right == MOVE_RIGHT)
-	// 	redrawing(data, MOVE_RIGHT);
-	// if (data->controls.rotate_left == ROTATE_LEFT)
-	// 	redrawing(data, ROTATE_LEFT);
-	// if (data->controls.rotate_right == ROTATE_RIGHT)
-	// 	redrawing(data, ROTATE_RIGHT);
-	// if (data->controls.escape == ESCAPE)
-	// 	redrawing(data, ESCAPE);
 }

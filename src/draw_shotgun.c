@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 21:37:31 by schung            #+#    #+#             */
-/*   Updated: 2022/09/13 22:32:52 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/15 03:19:08 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static bool    is_movement(t_data *data)
 {
     return (data->controls.down != -1 || data->controls.up != -1
             || data->controls.left != -1 || data->controls.right != -1);
-
 }
 
 void    draw_shotgun(t_data *data)

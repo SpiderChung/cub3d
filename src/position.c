@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:50:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/06 22:05:29 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/15 03:21:55 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ int	set_player_position(t_data *data, int x, int y, char c)
 	else if (c == 'S')
 		to_south(data);
 	else
-		return(EXIT_FAILURE);
-	return(EXIT_SUCCESS);
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
-
-
-

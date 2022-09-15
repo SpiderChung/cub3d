@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:18:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/14 17:37:31 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/15 03:24:26 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ int	init_data(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+void	init_door(t_door *door)
+{
+	door->door = false;
+	door->open_vert[0] = -1;
+	door->open_vert[1] = -1;
+	door->open_hor[0] = -1;
+	door->open_hor[1] = -1;
+	door->perp_wall_dist = 0;
+	door->x = 0;
+	door->side = 0;
+	door->dir_x = 0;
+	door->dir_y = 0;
+}
+
 void	start_init(t_data *data)
 {
 	int i;
@@ -59,24 +73,25 @@ int main(int argc, char **argv)
 {
 	t_data	data;
 	start_init(&data);
+	init_door(&data.door);
 	char 	map[20][20] = {	"11111111111111111111",
 							"10000000000000000001",
 							"10000000000000000001",
 							"10000000000000000001",
 							"10000000000000000111",
-							"100000000000000001",
-							"10000000000000000111",
-							"10000000000000000001",
-							"10000000000000000001",
-							"10000000000000000001",
-							"10000000000011100001",
+							"100111110000000001",
+							"10010001000000000111",
+							"10010002000000000001",
+							"10010001000000000001",
+							"10011111000000000001",
+							"10000000000012100001",
 							"10000000000010100001",
-							"10000000000011100001",
+							"10000000000012100001",
+							"10001000000000000001",
+							"10001000000000000001",
+							"10001000100000000001",
 							"10000000000000000001",
-							"10000000000000000001",
-							"10000000000000000001",
-							"10000000000000000001",
-							"10000000000000000001",
+							"10000001100001110001",
 							"10000000000000000001",
 							"11111111111111111111"};
 
@@ -90,20 +105,6 @@ int main(int argc, char **argv)
  	}
 	data.map.columns = 20;
 	data.map.rows = 20;
-	// i = 0;
-	// int j;
-	// while (i < SIZE_XPM) 
-	// {
-	// 	j = 0;
-	// 	while (j < SIZE_XPM)
-	// 	{
-	// 		ft_putnbr_fd(data.img.textures.east_wall[i][j], 1);
-	// 		ft_putstr_fd(" ", 1);
-	// 		j++;
-	// 	}
-	// 	ft_putstr_fd("\n", 1);
-	// 	i++;
-	// }
 	if (!argv)
 		printf("Hello");
 	if (argc != 2 && write(2, "Wrong number of arguments!\n", 28))
@@ -111,7 +112,7 @@ int main(int argc, char **argv)
 	if (init_data(&data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	ft_memset(&data.controls, -1, sizeof(t_controls));
-	set_player_position(&data, 6, 6, 'S');
+	set_player_position(&data, 6, 16, 'S');
 	mlx_loop_hook(data.mlx_ptr, draw_game, &data);
 	mlx_hook(data.mlx_win, 6, 1L << 0, mouse_hook, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);

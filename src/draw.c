@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:45:00 by schung            #+#    #+#             */
-/*   Updated: 2022/09/13 22:35:19 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/15 00:59:56 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int draw_game(t_data *data)
 		draw_walls(data, x);
 		draw_ceiling(data, x, data->wall.top);
 		draw_floor(data, x, data->wall.bottom);
+		if (data->door.door)
+			draw_doors(data, x);
 		x++;
 	}
 	draw_minimap(data);

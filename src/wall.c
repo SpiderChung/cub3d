@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:43:59 by schung            #+#    #+#             */
-/*   Updated: 2022/09/14 17:33:56 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/15 03:14:59 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	draw_walls(t_data *data, int x)
 		wall_y = (int)data->wall.position & (SIZE_XPM - 1);
 		data->wall.position += data->wall.step;
 		pixel = get_pixel(&data->wall, &data->img, wall_y);
-		if (data->wall.direction != west)
-			pixel = (pixel >> 1) & 8355711;
 		my_mlx_pixel_put(&data->img, x, y, pixel);
 		y++;
 	}

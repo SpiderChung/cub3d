@@ -6,12 +6,11 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:15:22 by schung            #+#    #+#             */
-/*   Updated: 2022/09/14 18:22:15 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/15 03:18:07 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
 
 int	get_textures(t_data *data)
 {
@@ -25,9 +24,8 @@ int	get_textures(t_data *data)
 	img->tex_path[west] = ft_strdup("textures/west.xpm");
 	img->tex_path[north] = ft_strdup("textures/north.xpm");
 	img->tex_path[south] = ft_strdup("textures/south.xpm");
-	img->tex_path[door] = ft_strdup("textures/door.xpm");
+	img->tex_path[door] = ft_strdup("textures/DoorBlue.xpm");
 	img->tex_path[shotgun] = ft_strdup("textures/shotgun.xpm");
-
 	i = 0;
 	while (i < 5)
 	{
@@ -78,6 +76,8 @@ void	get_wall_pixels(t_img *img, int type)
 				img->textures.south_wall[i][j] = my_mlx_pixel_get(img, i, j);
 			else if (type == west)
 				img->textures.west_wall[i][j] = my_mlx_pixel_get(img, i, j);
+			else if (type == door)
+				img->textures.doors[i][j] = my_mlx_pixel_get(img, i, j);
 			j++;
 		}
 		i++;

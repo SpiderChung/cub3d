@@ -6,13 +6,13 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:39:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/13 22:47:00 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/15 03:21:30 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void set_direction(t_data *data, t_ray *ray)
+void	set_direction(t_data *data, t_ray *ray)
 {
 	if (ray->dir_x < 0)
 	{
@@ -38,16 +38,17 @@ void set_direction(t_data *data, t_ray *ray)
 		ray->side_dist_y = ((int)data->p_y + 1.0 - data->p_y) * ray->delta_y;
 		data->wall.horizontal = east;
 	}
-
 }
 
 bool	is_wall(t_data *data, int x, int y, int p_x)
 {
-	int i;
+	int	i;
 
 	i = p_x;
 	i++;
-	if (data->map.map[x][y] != '0' && data->map.map[x][y] != '2')
+	if (data->map.map[x][y] == '2')
+		set_door_data(data, p_x);
+	if (data->map.map[x][y] != '0')
 		return (true);
 	return (false);
 }
@@ -55,8 +56,8 @@ bool	is_wall(t_data *data, int x, int y, int p_x)
 void	searching_wall(t_data *data, t_ray *ray, int p_x)
 {
 	int	wall;
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = (int)data->p_x;
 	y = (int)data->p_y;
@@ -96,14 +97,15 @@ double	get_perp_wall_dist(t_data *data)
 		perp_wall_dist = ray->side_dist_y - ray->delta_y;
 	}
 	if (perp_wall_dist == 0)
-	  	perp_wall_dist += 0.01;
+		perp_wall_dist += 0.01;
 	return (perp_wall_dist);
 }
 
-int get_ray(t_data *data, int x)
+int	get_ray(t_data *data, int x)
 {
 	t_ray	*ray;
 
+	data->door.door = false;
 	ray = &data->ray;
 	ray->camera = 2 * x / (double)WIDTH - 1;
 	ray->dir_x = data->dir_x + data->plane_x * ray->camera;
@@ -112,7 +114,7 @@ int get_ray(t_data *data, int x)
 		ray->delta_x = 1e30;
 	else
 		ray->delta_x = fabs(1 / ray->dir_x);
-	if (ray->dir_y == 0)	
+	if (ray->dir_y == 0)
 		ray->delta_y = 1e30;
 	else
 		ray->delta_y = fabs(1 / ray->dir_y);
