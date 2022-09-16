@@ -1,4 +1,4 @@
-## cub3d
+## cub3D
 Inspired by Wolfenstein 3D
 
 
