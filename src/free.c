@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 05:02:39 by schung            #+#    #+#             */
-/*   Updated: 2022/09/17 05:22:00 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/18 00:21:57 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ char	*ft_free_array(char ***arr, unsigned int allocated)
 void	free_all(t_data *data)
 {
 	free_texture_paths(&data->img);
-	ft_free_array(&data->map->lines, data->map->heigth);
+	ft_free_array(&data->map->lines, data->map->width);
 }

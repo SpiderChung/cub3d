@@ -6,26 +6,34 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:15:22 by schung            #+#    #+#             */
-/*   Updated: 2022/09/17 05:13:34 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/18 01:55:40 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	get_textures(t_data *data, t_validate *val)
+int	shotgun_textures(t_data *data)
 {
 	int		width;
 	int		height;
-	int		i;
-	t_img	*img;
 
-	img = &data->img;
-	img->tex_path[east] = val->wall.ea;
-	img->tex_path[west] = val->wall.we;
-	img->tex_path[north] = val->wall.no;
-	img->tex_path[south] = val->wall.so;
-	img->tex_path[door] = ft_strdup("textures/DoorBlue.xpm");
-	img->tex_path[shotgun] = ft_strdup("textures/shotgun.xpm");
+	data->img.textures.shotgun = mlx_xpm_file_to_image(data->mlx_ptr,
+			data->img.tex_path[shotgun], &width, &height);
+	if (data->img.textures.shotgun == NULL)
+	{		
+		ft_putstr_fd(data->img.tex_path[5], 2);
+		ft_putstr_fd(" : FAILURE_OF_MEMORY_ALLOCATION\n", 2);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+static int	get_wall_textures(t_data *data, t_img *img)
+{
+	int		i;
+	int		width;
+	int		height;
+
 	i = 0;
 	while (i < 5)
 	{
@@ -34,7 +42,7 @@ int	get_textures(t_data *data, t_validate *val)
 		if (data->img.textures.tex_ptr[i] == NULL)
 		{
 			ft_putstr_fd(data->img.tex_path[i], 2);
-			ft_putstr_fd(" : Failure of memory allocation\n", 2);
+			ft_putstr_fd(" : FAILURE_OF_MEMORY_ALLOCATION\n", 2);
 			return (EXIT_FAILURE);
 		}
 		img->textures.tex_addr = mlx_get_data_addr(img->textures.tex_ptr[i],
@@ -46,14 +54,24 @@ int	get_textures(t_data *data, t_validate *val)
 		img->textures.tex_addr = NULL;
 		i++;
 	}
-	img->textures.shotgun = mlx_xpm_file_to_image(data->mlx_ptr,
-			data->img.tex_path[shotgun], &width, &height);
-	if (img->textures.shotgun == NULL)
-	{		
-		ft_putstr_fd(data->img.tex_path[i], 2);
-		ft_putstr_fd(" : Failure of memory allocation\n", 2);
+	return (EXIT_SUCCESS);
+}
+
+int	get_textures(t_data *data, t_validate *val)
+{	
+	t_img	*img;
+
+	img = &data->img;
+	img->tex_path[east] = val->wall.ea;
+	img->tex_path[west] = val->wall.we;
+	img->tex_path[north] = val->wall.no;
+	img->tex_path[south] = val->wall.so;
+	img->tex_path[door] = ft_strdup("textures/DoorBlue.xpm");
+	img->tex_path[shotgun] = ft_strdup("textures/shotgun.xpm");
+	if (get_wall_textures(data, img) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	}
+	if (shotgun_textures(data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

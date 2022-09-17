@@ -12,24 +12,6 @@
 
 #include "validation.h"
 
-void	validate_print(t_validate *val, int i)
-{
-	printf("----------------\nColors\nfloor color: %i,%i,%i\n",
-		val->colors.floor[0], val->colors.floor[1], val->colors.floor[2]);
-	printf("ceiling color: %i,%i,%i\n", val->colors.ceiling[0],
-		val->colors.ceiling[1], val->colors.ceiling[2]);
-	printf("----------------\nWall:\nNO -|%s|\nSO -|%s|\nWE -|%s|\nEA -|%s|\n",
-		val->wall.no, val->wall.so, val->wall.we, val->wall.ea);
-	printf("----------------\nHERO\nX - %i, Y - %i, direction - %c\n",
-		val->hero.x, val->hero.y, val->hero.direction);
-	printf("----------------\nMAP\nChar list: |%s|\nmap height = %i\nmap\
-	 width = %i\n----------------\n",
-		val->map.char_list, val->map.heigth, val->map.width);
-	while (++i < val->map.heigth)
-		printf("|%s|\n", val->map.lines[i]);
-	printf("----------------\n");
-}
-
 void	validate_free(t_arrays *ar)
 {
 	free(ar->colors[0]);
@@ -56,7 +38,6 @@ t_validate	*validate_init(t_arrays *ar)
 		val->colors.floor[ar->ii] = ar->f[ar->ii];
 		val->colors.ceiling[ar->ii] = ar->c[ar->ii];
 	}
-	
 	val->wall.no = ft_strdup(ar->textures[0]);
 	val->wall.so = ft_strdup(ar->textures[1]);
 	val->wall.we = ft_strdup(ar->textures[2]);
@@ -71,7 +52,6 @@ t_validate	*validate_init(t_arrays *ar)
 	val->hero.direction = ar->direction;
 	val->hero.x = ar->hpx;
 	val->hero.y = ar->hpy;
-	val->map.lines[val->hero.y][val->hero.x] = '0';
 	validate_free(ar);
 	return (val);
 }

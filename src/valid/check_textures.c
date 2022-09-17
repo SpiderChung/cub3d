@@ -42,6 +42,6 @@ void	check_textures(t_arrays *ar)
 		close(ar->kk);
 		free(ar->textures[ar->jj]);
 		ar->textures[ar->jj] = ft_strdup(temp);
+		free(temp);
 	}
-	free(temp);
 }

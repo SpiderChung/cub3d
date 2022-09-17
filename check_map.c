@@ -54,12 +54,9 @@ int	check_map_quadro(t_arrays *ar)
 	size_t	len;
 	int		i;
 
-	i = 0;
+	i = -1;
 	len = ft_strlen(ar->map[0]);
-	while (i < ar->map_height && ft_strlen(ar->map[i]) == len)
-	{
-		i++;
-	}
+	while (++i < ar->map_height && ft_strlen(ar->map[++i]) == len)
 	if (ar->map[++i] == NULL)
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:50:48 by schung            #+#    #+#             */
-/*   Updated: 2022/09/17 05:22:41 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/18 00:22:20 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,47 +22,10 @@ int	exit_game(t_data *data, int exit_state)
 	exit(EXIT_SUCCESS);
 }
 
-static void	rotation(int keycode, t_data *data, double len)
-{
-	double	old_dir;
-	double	old_plane;
-
-	if (keycode == ROTATE_RIGHT)
-	{
-		old_dir = data->dir_x;
-		data->dir_x = cos(ROTATE_SPEED) * data->dir_x
-			- sin(ROTATE_SPEED) * data->dir_y;
-		data->dir_y = sin(ROTATE_SPEED) * old_dir
-			+ cos(ROTATE_SPEED) * data->dir_y;
-		old_plane = data->plane_x;
-		data->plane_x = cos(ROTATE_SPEED) * data->plane_x
-			- sin(ROTATE_SPEED) * data->plane_y;
-		data->plane_y = sin(ROTATE_SPEED) * old_plane
-			+ cos(ROTATE_SPEED) * data->plane_y;
-		data->dir_x /= len;
-		data->dir_y /= len;
-	}
-	if (keycode == ROTATE_LEFT)
-	{
-		old_dir = data->dir_x;
-		data->dir_x = cos(-ROTATE_SPEED) * data->dir_x
-			- sin(-ROTATE_SPEED) * data->dir_y;
-		data->dir_y = sin(-ROTATE_SPEED) * old_dir
-			+ cos(-ROTATE_SPEED) * data->dir_y;
-		old_plane = data->plane_x;
-		data->plane_x = cos(-ROTATE_SPEED) * data->plane_x
-			- sin(-ROTATE_SPEED) * data->plane_y;
-		data->plane_y = sin(-ROTATE_SPEED) * old_plane
-			+ cos(-ROTATE_SPEED) * data->plane_y;
-		data->dir_x /= len;
-		data->dir_y /= len;
-	}
-}
-
 int	mouse_hook(int x, int y, t_data *data)
 {
 	static int	previous;
-	int 		current;
+	int			current;
 
 	current = x;
 	(void)y;
@@ -72,44 +35,6 @@ int	mouse_hook(int x, int y, t_data *data)
 		redrawing(data, ROTATE_LEFT);
 	previous = current;
 	return (EXIT_SUCCESS);
-}
-
-void	redrawing(t_data *data, int keycode)
-{
-	double len;
-
-	len = sqrt(data->dir_x * data->dir_x + data->dir_y * data->dir_y);
-	if (keycode == ESCAPE)
-		exit_game(data, EXIT_SUCCESS);
-	if (keycode == MOVE_RIGHT)
-	{
-		if (wall_right_x(data, len) == false)
-			data->p_x += (data->dir_y) / len * SPEED;
-		if (wall_right_y(data, len) == false)
-			data->p_y += (-data->dir_x) / len * SPEED;
-	}
-	if (keycode == MOVE_LEFT)
-	{
-		if (wall_left_x(data, len) == false)
-			data->p_x += (-data->dir_y) / len * SPEED;
-		if (wall_left_y(data, len) == false)
-			data->p_y += (data->dir_x) / len * SPEED;
-	}
-	if (keycode == MOVE_UP)
-	{
-		if (wall_in_front_x(data, len) == false)
-			data->p_x += (data->dir_x) / len * SPEED;
-		if (wall_in_front_y(data, len) == false)
-			data->p_y += (data->dir_y) / len * SPEED;
-	}
-	if (keycode == MOVE_DOWN)
-	{
-		if (wall_behind_x(data, len) == false)
-			data->p_x += (-data->dir_x) / len * SPEED;
-		if (wall_behind_y(data, len) == false)
-			data->p_y += (-data->dir_y) / len * SPEED;
-	}
-	rotation(keycode, data, len);
 }
 
 int	key_release(int key, t_data *data)
@@ -133,7 +58,6 @@ int	key_release(int key, t_data *data)
 
 int	key_press(int keycode, t_data *data)
 {
-
 	if (keycode == MOVE_UP)
 		data->controls.up = MOVE_UP;
 	else if (keycode == MOVE_DOWN)

@@ -25,7 +25,7 @@
 # define IN_CHAR "NSEW20"
 # define BORDER_CHAR "1 "
 # define HERO_CHAR "NSEW"
-# define DOOR_CHAR 'D'
+# define DOOR_CHAR '2'
 
 /*
 # define NO_ARG 1
@@ -95,7 +95,6 @@ typedef struct validate_s
 }	t_validate;
 
 /*------------validation.c----------------------*/
-void		validate_print(t_validate *val, int i);
 void		validate_free(t_arrays *ar);
 t_validate	*validate_init(t_arrays *ar);
 t_validate	*validate(char **argv, int argc);

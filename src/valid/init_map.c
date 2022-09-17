@@ -57,4 +57,5 @@ void	init_map(t_arrays *ar, char *str, int *i)
 		if (str[*i])
 		(*i)++;
 	}
+	free(temp);
 }

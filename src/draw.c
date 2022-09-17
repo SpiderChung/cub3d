@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:45:00 by schung            #+#    #+#             */
-/*   Updated: 2022/09/17 04:39:12 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/18 01:57:47 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	draw_ceiling(t_data *data, int x, int up_to)
 	int	color;
 
 	red = data->img.ceiling[0];
-	green = data->img.ceiling[1];;
-	blue = data->img.ceiling[2];;
+	green = data->img.ceiling[1];
+	blue = data->img.ceiling[2];
 	color = create_rgb(red, green, blue);
 	i = 0;
 	while (i < up_to && i < HEIGHT)
@@ -41,8 +41,8 @@ void	draw_floor(t_data *data, int x, int from)
 	int	color;
 
 	red = data->img.floor[0];
-	green = data->img.floor[1];;
-	blue = data->img.floor[2];;
+	green = data->img.floor[1];
+	blue = data->img.floor[2];
 	color = create_rgb(red, green, blue);
 	i = from;
 	while (i < HEIGHT)
@@ -52,13 +52,13 @@ void	draw_floor(t_data *data, int x, int from)
 	}
 }
 
-int draw_game(t_data *data)
+int	draw_game(t_data *data)
 {
-	int x;
+	int	x;
 
 	x = 0;
 	check_events(data);
-	usleep(3750);
+	usleep(5000);
 	while (x < WIDTH)
 	{
 		get_ray(data, x);
@@ -73,6 +73,5 @@ int draw_game(t_data *data)
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img.img_ptr, 0, 0);
 	draw_shotgun(data);
-	//mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	return (EXIT_SUCCESS);
 }

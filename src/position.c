@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:50:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/17 02:49:08 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/18 01:57:54 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	set_player_position(t_data *data, t_hero_position *hero)
 {
 	data->p_x = hero->y + 0.5;
 	data->p_y = hero->x + 0.5;
+	data->map->lines[hero->y][hero->x] = '0';
 	if (hero->direction == 'N')
 		to_north(data);
 	else if (hero->direction == 'E')

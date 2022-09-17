@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:18:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/17 05:18:46 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/18 02:10:26 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	init_door(t_door *door)
 
 void	start_init(t_data *data)
 {
-	int i;
+	int	i;
+
 	data->mlx_ptr = NULL;
 	data->mlx_win = NULL;
 	data->img.img_ptr = NULL;
@@ -67,71 +68,33 @@ void	start_init(t_data *data)
 		data->img.tex_path[i++] = NULL;
 	i = 0;
 	while (i < 5)
-	 	data->img.textures.tex_ptr[i++] = NULL;
-
+		data->img.textures.tex_ptr[i++] = NULL;
+	init_door(&(data->door));
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_data		data;
-	t_validate	val;
-	
-	start_init(&data);
-	
-	init_door(&data.door);
-	val = *(validate(argv, argc));
-	set_player_position(&data, &(val.hero));
-	// char 	map[20][20] = {	"11111111111111111111",
-	// 						"10000000000000000001",
-	// 						"10000000000000000001",
-	// 						"10000000000000000001",
-	// 						"10000000000000000111",
-	// 						"100111110000000001",
-	// 						"10010001000000000111",
-	// 						"10010002000000000001",
-	// 						"10010001000000000001",
-	// 						"10011111000000000001",
-	// 						"10000000000012100001",
-	// 						"10000000000010100001",
-	// 						"10000000000012100001",
-	// 						"10001000000000000001",
-	// 						"10001000000000000001",
-	// 						"10001000100000000001",
-	// 						"10000000000000000001",
-	// 						"10000001100001110001",
-	// 						"10000000000000000001",
-	// 						"11111111111111111111"};
+	t_validate	*val;
+	int			i;
 
-	// data.map.lines = (char **)ft_calloc(21, sizeof(char *));
-	// int i = 0;
-	// while (i < 20)
-	// {
-	// 	data.map.lines[i] = (char *)ft_calloc(20, sizeof(char));
-	// 	data.map.lines[i] = map[i];
-	// 	i++;
- 	// }
-	// data.map.width = 20;
-	// data.map.heigth = 20;
-	data.map = &(val.map);
-	data.img.floor[0] = val.colors.floor[0];
-	data.img.floor[1] = val.colors.floor[1];
-	data.img.floor[2] = val.colors.floor[2];
-	data.img.ceiling[0] = val.colors.ceiling[0];
-	data.img.ceiling[1] = val.colors.ceiling[1];
-	data.img.ceiling[2] = val.colors.ceiling[2];
-	if (init_data(&data, &val) == EXIT_FAILURE)
-	 	return (EXIT_FAILURE);
-	int i = 0;
-	while (i < data.map->width)
+	start_init(&data);
+	val = validate(argv, argc);
+	//free(&(val->map));
+	while (42)
 	{
-		ft_putstr_fd(data.map->lines[i], 1);
-		ft_putstr_fd("\n", 1);
-		i++;
+		
 	}
-	ft_putnbr_fd(data.map->width, 1);
-	ft_putstr_fd("\n", 1);
-	ft_putnbr_fd(data.map->heigth, 1);
-	ft_putstr_fd("\n", 1);
+	data.map = &(val->map);
+	set_player_position(&data, &(val->hero));
+	i = 0;
+	while (i++ < 3)
+	{
+		data.img.floor[i] = val->colors.floor[i];
+		data.img.ceiling[i] = val->colors.ceiling[i];
+	}
+	if (init_data(&data, val) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	free_texture_paths(&(data.img));
 	mlx_loop_hook(data.mlx_ptr, draw_game, &data);
 	mlx_hook(data.mlx_win, 6, 1L << 0, mouse_hook, &data);
