@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 18:50:48 by schung            #+#    #+#             */
-/*   Updated: 2022/09/15 03:25:28 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 05:22:41 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	exit_game(t_data *data, int exit_state)
 {
 	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->mlx_win);
+	free_all(data);
 	if (exit_state == EXIT_FAILURE)
 		exit(EXIT_FAILURE);
 	exit(EXIT_SUCCESS);

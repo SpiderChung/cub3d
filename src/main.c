@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:18:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/17 03:10:00 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 05:18:46 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,42 @@ int main(int argc, char **argv)
 	t_validate	val;
 	
 	start_init(&data);
+	
 	init_door(&data.door);
 	val = *(validate(argv, argc));
 	set_player_position(&data, &(val.hero));
-	data.map = val.map;
+	// char 	map[20][20] = {	"11111111111111111111",
+	// 						"10000000000000000001",
+	// 						"10000000000000000001",
+	// 						"10000000000000000001",
+	// 						"10000000000000000111",
+	// 						"100111110000000001",
+	// 						"10010001000000000111",
+	// 						"10010002000000000001",
+	// 						"10010001000000000001",
+	// 						"10011111000000000001",
+	// 						"10000000000012100001",
+	// 						"10000000000010100001",
+	// 						"10000000000012100001",
+	// 						"10001000000000000001",
+	// 						"10001000000000000001",
+	// 						"10001000100000000001",
+	// 						"10000000000000000001",
+	// 						"10000001100001110001",
+	// 						"10000000000000000001",
+	// 						"11111111111111111111"};
+
+	// data.map.lines = (char **)ft_calloc(21, sizeof(char *));
+	// int i = 0;
+	// while (i < 20)
+	// {
+	// 	data.map.lines[i] = (char *)ft_calloc(20, sizeof(char));
+	// 	data.map.lines[i] = map[i];
+	// 	i++;
+ 	// }
+	// data.map.width = 20;
+	// data.map.heigth = 20;
+	data.map = &(val.map);
 	data.img.floor[0] = val.colors.floor[0];
 	data.img.floor[1] = val.colors.floor[1];
 	data.img.floor[2] = val.colors.floor[2];
@@ -90,16 +122,22 @@ int main(int argc, char **argv)
 	if (init_data(&data, &val) == EXIT_FAILURE)
 	 	return (EXIT_FAILURE);
 	int i = 0;
-	while (i < val.map.heigth)
+	while (i < data.map->width)
 	{
-		ft_putstr_fd(val.map.lines[i], 1);
+		ft_putstr_fd(data.map->lines[i], 1);
 		ft_putstr_fd("\n", 1);
 		i++;
 	}
+	ft_putnbr_fd(data.map->width, 1);
+	ft_putstr_fd("\n", 1);
+	ft_putnbr_fd(data.map->heigth, 1);
+	ft_putstr_fd("\n", 1);
+	free_texture_paths(&(data.img));
 	mlx_loop_hook(data.mlx_ptr, draw_game, &data);
 	mlx_hook(data.mlx_win, 6, 1L << 0, mouse_hook, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 0, key_release, &data);
+	mlx_hook(data.mlx_win, 17, 1L << 17, exit_game, &data);
 	mlx_loop(data.mlx_ptr);
 	mlx_destroy_image(data.mlx_ptr, data.img.img_ptr);
 	exit(EXIT_SUCCESS);

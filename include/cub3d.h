@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/17 01:18:24 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 05:20:45 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*mlx_win;
 	t_controls	controls;
-	t_map		map;
+	t_map		*map;
 	t_img		img;
 	t_ray		ray;
 	t_wall		wall;
@@ -226,5 +226,9 @@ int		wall_right_y(t_data *data, double len);
 //	wall.c
 void	get_wall(t_data *data);
 void	draw_walls(t_data *data, int x);
+
+void	free_texture_paths(t_img *img);
+char	*ft_free_array(char ***arr, unsigned int allocated);
+void	free_all(t_data *data);
 
 #endif

@@ -61,8 +61,8 @@ t_validate	*validate_init(t_arrays *ar)
 	val->wall.so = ft_strdup(ar->textures[1]);
 	val->wall.we = ft_strdup(ar->textures[2]);
 	val->wall.ea = ft_strdup(ar->textures[3]);
-	val->map.heigth = ar->map_height;
-	val->map.width = ar->map_width;
+	val->map.width = ar->map_height;
+	val->map.heigth = ar->map_width;
 	val->map.lines = malloc(sizeof(char *) * (ar->map_height + 1));
 	ar->ii = -1;
 	while (++(ar->ii) < ar->map_height)
@@ -71,7 +71,7 @@ t_validate	*validate_init(t_arrays *ar)
 	val->hero.direction = ar->direction;
 	val->hero.x = ar->hpx;
 	val->hero.y = ar->hpy;
-	//val->map.lines[val->hero.y][val->hero.x] = '0';
+	val->map.lines[val->hero.y][val->hero.x] = '0';
 	validate_free(ar);
 	return (val);
 }

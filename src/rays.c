@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:39:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/17 00:34:59 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 03:45:41 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ bool	is_wall(t_data *data, int x, int y, int p_x)
 
 	i = p_x;
 	i++;
-	if (data->map.lines[x][y] == '2')
+	if (data->map->lines[x][y] == '2')
 		set_door_data(data, p_x);
-	if (data->map.lines[x][y] != '0')
+	if (data->map->lines[x][y] != '0')
 		return (true);
 	return (false);
 }
