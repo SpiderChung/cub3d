@@ -6,13 +6,13 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:18:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/15 03:24:26 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 03:10:00 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	init_data(t_data *data)
+int	init_data(t_data *data, t_validate *val)
 {
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
@@ -26,10 +26,11 @@ int	init_data(t_data *data)
 		ft_putstr_fd("Failure of creating image pointer\n", 2);
 		exit_game(data, EXIT_FAILURE);
 	}
-	if (get_textures(data) == EXIT_FAILURE)
+	if (get_textures(data, val) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bits_per_pixel,
-			&data->img.line_length, &data->img.endian);
+	data->img.addr = mlx_get_data_addr(data->img.img_ptr,
+			&data->img.bits_per_pixel, &data->img.line_length,
+			&data->img.endian);
 	if (data->img.addr == NULL)
 	{
 		mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
@@ -60,59 +61,41 @@ void	start_init(t_data *data)
 	data->mlx_win = NULL;
 	data->img.img_ptr = NULL;
 	data->img.addr = NULL;
+	ft_memset(&(data->controls), -1, sizeof(t_controls));
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 		data->img.tex_path[i++] = NULL;
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	 	data->img.textures.tex_ptr[i++] = NULL;
 
 }
 
 int main(int argc, char **argv)
 {
-	t_data	data;
+	t_data		data;
+	t_validate	val;
+	
 	start_init(&data);
 	init_door(&data.door);
-	char 	map[20][20] = {	"11111111111111111111",
-							"10000000000000000001",
-							"10000000000000000001",
-							"10000000000000000001",
-							"10000000000000000111",
-							"100111110000000001",
-							"10010001000000000111",
-							"10010002000000000001",
-							"10010001000000000001",
-							"10011111000000000001",
-							"10000000000012100001",
-							"10000000000010100001",
-							"10000000000012100001",
-							"10001000000000000001",
-							"10001000000000000001",
-							"10001000100000000001",
-							"10000000000000000001",
-							"10000001100001110001",
-							"10000000000000000001",
-							"11111111111111111111"};
-
-	data.map.map = (char **)ft_calloc(21, sizeof(char *));
+	val = *(validate(argv, argc));
+	set_player_position(&data, &(val.hero));
+	data.map = val.map;
+	data.img.floor[0] = val.colors.floor[0];
+	data.img.floor[1] = val.colors.floor[1];
+	data.img.floor[2] = val.colors.floor[2];
+	data.img.ceiling[0] = val.colors.ceiling[0];
+	data.img.ceiling[1] = val.colors.ceiling[1];
+	data.img.ceiling[2] = val.colors.ceiling[2];
+	if (init_data(&data, &val) == EXIT_FAILURE)
+	 	return (EXIT_FAILURE);
 	int i = 0;
-	while (i < 20)
+	while (i < val.map.heigth)
 	{
-		data.map.map[i] = (char *)ft_calloc(20, sizeof(char));
-		data.map.map[i] = map[i];
+		ft_putstr_fd(val.map.lines[i], 1);
+		ft_putstr_fd("\n", 1);
 		i++;
- 	}
-	data.map.columns = 20;
-	data.map.rows = 20;
-	if (!argv)
-		printf("Hello");
-	if (argc != 2 && write(2, "Wrong number of arguments!\n", 28))
-		return (EXIT_FAILURE);
-	if (init_data(&data) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	ft_memset(&data.controls, -1, sizeof(t_controls));
-	set_player_position(&data, 6, 16, 'S');
+	}
 	mlx_loop_hook(data.mlx_ptr, draw_game, &data);
 	mlx_hook(data.mlx_win, 6, 1L << 0, mouse_hook, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_press, &data);

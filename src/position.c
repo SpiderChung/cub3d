@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 18:50:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/15 03:21:55 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 02:49:08 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ void	to_east(t_data *data)
 	data->dir_y = 1;
 }
 
-int	set_player_position(t_data *data, int x, int y, char c)
+int	set_player_position(t_data *data, t_hero_position *hero)
 {
-	data->p_x = x;
-	data->p_y = y;
-	if (c == 'N')
+	data->p_x = hero->y + 0.5;
+	data->p_y = hero->x + 0.5;
+	if (hero->direction == 'N')
 		to_north(data);
-	else if (c == 'E')
+	else if (hero->direction == 'E')
 		to_east(data);
-	else if (c == 'W')
+	else if (hero->direction == 'W')
 		to_west(data);
-	else if (c == 'S')
+	else if (hero->direction == 'S')
 		to_south(data);
 	else
 		return (EXIT_FAILURE);

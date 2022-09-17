@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 20:14:51 by schung            #+#    #+#             */
-/*   Updated: 2022/09/15 03:22:05 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 00:34:06 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ int	draw_minimap(t_data *data)
 	int	j;
 	int	color;
 
-	rows = data->map.rows;
-	col = data->map.columns;
+	rows = data->map.width;
+	col = data->map.heigth;
 	i = 0;
 	while (i < rows)
 	{
 		j = 0;
 		while (j < col)
 		{
-			color = get_color(data->map.map[j][i]);
+			color = get_color(data->map.lines[j][i]);
 			if (color)
 				draw_25(&data->img, i, j, color);
 			j++;

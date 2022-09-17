@@ -53,9 +53,10 @@ t_validate	*validate_init(t_arrays *ar)
 	ar->ii = -1;
 	while (++(ar->ii) < 3)
 	{
-	val->colors.floor[ar->ii] = ar->f[ar->ii];
-	val->colors.ceiling[ar->ii] = ar->c[ar->ii];
+		val->colors.floor[ar->ii] = ar->f[ar->ii];
+		val->colors.ceiling[ar->ii] = ar->c[ar->ii];
 	}
+	
 	val->wall.no = ft_strdup(ar->textures[0]);
 	val->wall.so = ft_strdup(ar->textures[1]);
 	val->wall.we = ft_strdup(ar->textures[2]);
@@ -64,12 +65,13 @@ t_validate	*validate_init(t_arrays *ar)
 	val->map.width = ar->map_width;
 	val->map.lines = malloc(sizeof(char *) * (ar->map_height + 1));
 	ar->ii = -1;
-	while (++(ar->ii) <= ar->map_height)
+	while (++(ar->ii) < ar->map_height)
 		val->map.lines[ar->ii] = ft_strdup(ar->map[ar->ii]);
 	val->map.char_list = ft_strdup(MAP_CHAR);
 	val->hero.direction = ar->direction;
 	val->hero.x = ar->hpx;
 	val->hero.y = ar->hpy;
+	//val->map.lines[val->hero.y][val->hero.x] = '0';
 	validate_free(ar);
 	return (val);
 }

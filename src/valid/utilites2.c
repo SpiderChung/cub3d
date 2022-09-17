@@ -1,22 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_val.c                                         :+:      :+:    :+:   */
+/*   utilites2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kthucydi <kthucydi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/14 08:43:37 by kthucydi          #+#    #+#             */
-/*   Updated: 2022/09/14 08:43:37 by kthucydi         ###   ########.fr       */
+/*   Created: 2022/09/14 09:35:52 by kthucydi          #+#    #+#             */
+/*   Updated: 2022/09/14 09:35:52 by kthucydi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "validation.h"
 
-int	main(int argc, char **argv)
+int	error(char *str)
 {
-	t_validate	*val;
+	write(2, str, ft_strlen(str));
+	write(2, "\n", 1);
+	exit (1);
+}
 
-	val = validate(argv, argc);
-	validate_print(val, -1);
-	return (0);
+char	*get_file(int fd)
+{
+	char	*s;
+	int		i;
+	char	*res;
+
+	s = (char *)malloc(10000);
+	i = 0;
+	while (read(fd, s + i, 1) > 0)
+		i++;
+	if (i > 0)
+	{
+		s[i] = '\0';
+		res = ft_strdup(s);
+		free(s);
+		return (res);
+	}
+	free(s);
+	return (NULL);
 }

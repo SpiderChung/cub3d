@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:45:00 by schung            #+#    #+#             */
-/*   Updated: 2022/09/15 00:59:56 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 03:05:38 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	draw_ceiling(t_data *data, int x, int up_to)
 	int	blue;
 	int	color;
 
-	red = 1;
-	green = 43;
-	blue = 122;
+	red = data->img.ceiling[0];
+	green = data->img.ceiling[1];;
+	blue = data->img.ceiling[2];;
 	color = create_rgb(red, green, blue);
 	i = 0;
 	while (i < up_to && i < HEIGHT)
@@ -40,9 +40,9 @@ void	draw_floor(t_data *data, int x, int from)
 	int	blue;
 	int	color;
 
-	red = 255;
-	green = 0;
-	blue = 122;
+	red = data->img.floor[0];
+	green = data->img.floor[1];;
+	blue = data->img.floor[2];;
 	color = create_rgb(red, green, blue);
 	i = from;
 	while (i < HEIGHT)
@@ -58,7 +58,7 @@ int draw_game(t_data *data)
 
 	x = 0;
 	check_events(data);
-	usleep(3750);
+	//usleep(3750);
 	while (x < WIDTH)
 	{
 		get_ray(data, x);

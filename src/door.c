@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 00:39:45 by schung            #+#    #+#             */
-/*   Updated: 2022/09/15 02:54:28 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 00:42:38 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	close_vert_door(t_data *data)
 	{
 		if (data->p_x <= (double)x - 0.3 || data->p_x >= (double)x + 1.3)
 		{
-			data->map.map[data->door.open_vert[0]][data->door.open_vert[1]]
+			data->map.lines[data->door.open_vert[0]][data->door.open_vert[1]]
 				= '2';
 			data->door.open_vert[0] = -1;
 			data->door.open_vert[1] = -1;
@@ -44,11 +44,11 @@ int	open_vert_door(t_data *data)
 	else
 		y = (int)((data->p_x + data->dir_x * SPEED) - WALL_DISTANCE);
 	x = (int)(data->p_y);
-	if (data->map.map[y][x] == '2')
+	if (data->map.lines[y][x] == '2')
 	{
 		data->door.open_vert[0] = y;
 		data->door.open_vert[1] = x;
-		data->map.map[y][x] = '0';
+		data->map.lines[y][x] = '0';
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);
@@ -65,7 +65,7 @@ int	close_horizone_door(t_data *data)
 	{
 		if (data->p_y <= (double)y - 0.3 || data->p_y >= (double)y + 1.3)
 		{
-			data->map.map[data->door.open_hor[0]][data->door.open_hor[1]]
+			data->map.lines[data->door.open_hor[0]][data->door.open_hor[1]]
 				= '2';
 			data->door.open_hor[0] = -1;
 			data->door.open_hor[1] = -1;
@@ -86,11 +86,11 @@ int	open_horizone_door(t_data *data)
 	else
 		y = (int)((data->p_y + data->dir_y * SPEED) - WALL_DISTANCE);
 	x = (int)(data->p_x);
-	if (data->map.map[x][y] == '2')
+	if (data->map.lines[x][y] == '2')
 	{
 		data->door.open_hor[0] = x;
 		data->door.open_hor[1] = y;
-		data->map.map[y][x] = '0';
+		data->map.lines[y][x] = '0';
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);

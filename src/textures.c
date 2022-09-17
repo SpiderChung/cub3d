@@ -6,13 +6,13 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 19:15:22 by schung            #+#    #+#             */
-/*   Updated: 2022/09/15 03:18:07 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 01:22:03 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int	get_textures(t_data *data)
+int	get_textures(t_data *data, t_validate *val)
 {
 	int		width;
 	int		height;
@@ -20,10 +20,10 @@ int	get_textures(t_data *data)
 	t_img	*img;
 
 	img = &data->img;
-	img->tex_path[east] = ft_strdup("textures/east.xpm");
-	img->tex_path[west] = ft_strdup("textures/west.xpm");
-	img->tex_path[north] = ft_strdup("textures/north.xpm");
-	img->tex_path[south] = ft_strdup("textures/south.xpm");
+	img->tex_path[east] = val->wall.ea;
+	img->tex_path[west] = val->wall.we;
+	img->tex_path[north] = val->wall.no;
+	img->tex_path[south] = val->wall.so;
 	img->tex_path[door] = ft_strdup("textures/DoorBlue.xpm");
 	img->tex_path[shotgun] = ft_strdup("textures/shotgun.xpm");
 	i = 0;

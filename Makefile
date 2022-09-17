@@ -6,7 +6,7 @@
 #    By: schung <schung@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 15:54:32 by tblaase           #+#    #+#              #
-#    Updated: 2022/09/14 19:02:47 by schung           ###   ########.fr        #
+#    Updated: 2022/09/16 23:21:24 by schung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror
 
 SRC_DIR		=	src/
+VAL_DIR		=	src/valid/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
 LIBFT_DIR	=	libft/
@@ -40,7 +41,15 @@ $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(LINK) -lm -o $(NAME)
 	@echo "$(GREEN)Finished [$(NAME)]$(RESET)"
 
-$(OBJ_DIR)%.o:$(SRC_DIR)%.c
+$(OBJ_DIR)%.o:$(SRC_DIR)%.c 
+	@mkdir -p $(OBJ_DIR)
+	@echo "$(YELLOW)Compiling [$@]...$(RESET)"
+	@$(CC) $(FLAGS) -I $(LIBMLX_DIR) -I $(LIBFT_DIR) -I $(INC_DIR) -o $@ -c $<
+	@printf "$(UP)$(CUT)"
+	@echo "$(GREEN)Finished [$@]$(RESET)"
+	@printf "$(UP)$(CUT)"
+
+$(OBJ_DIR)%.o:$(VAL_DIR)%.c 
 	@mkdir -p $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling [$@]...$(RESET)"
 	@$(CC) $(FLAGS) -I $(LIBMLX_DIR) -I $(LIBFT_DIR) -I $(INC_DIR) -o $@ -c $<

@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 13:01:50 by schung            #+#    #+#             */
-/*   Updated: 2022/09/15 03:10:26 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/17 01:18:24 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdbool.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
+# include "../src/valid/validation.h"
 
 # define EXIT_FAILURE 	1
 # define EXIT_SUCCESS 	0
@@ -37,12 +38,12 @@
 
 // keycodes
 # define MOVE_LEFT 		0
-# define MOVE_RIGHT 		2
+# define MOVE_RIGHT 	2
 # define MOVE_DOWN 		1
 # define MOVE_UP 		13
 # define ROTATE_LEFT 	123
 # define ROTATE_RIGHT 	124
-# define ESCAPE 			53
+# define ESCAPE 		53
 
 typedef struct s_ray
 {
@@ -115,13 +116,6 @@ typedef struct s_wall
 	int		vertical;
 	int		horizontal;
 }	t_wall;
-
-typedef struct s_map
-{
-	int		columns;
-	int		rows;
-	char	**map;
-}	t_map;
 
 typedef struct s_door
 {
@@ -206,7 +200,7 @@ int		draw_partial_minimap(t_data *data);
 int		draw_minimap(t_data *data);
 
 //	position.c
-int		set_player_position(t_data *data, int x, int y, char c);
+int		set_player_position(t_data *data, t_hero_position *hero);
 
 //	rays.c
 void	set_direction(t_data *data, t_ray *ray);
@@ -216,7 +210,7 @@ double	get_perp_wall_dist(t_data *data);
 int		get_ray(t_data *data, int x);
 
 //  textures.c
-int		get_textures(t_data *data);
+int		get_textures(t_data *data, t_validate *val);
 void	get_wall_pixels(t_img *img, int type);
 
 //	wall_collision.c

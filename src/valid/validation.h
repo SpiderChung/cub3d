@@ -18,10 +18,11 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "../src_lib/libft.h"
+# include <stdio.h>
+# include "../../libft/libft.h"
 
-# define MAP_CHAR "NSEWD 01"
-# define IN_CHAR "NSEWD0"
+# define MAP_CHAR "NSEW2 01"
+# define IN_CHAR "NSEW20"
 # define BORDER_CHAR "1 "
 # define HERO_CHAR "NSEW"
 # define DOOR_CHAR 'D'
@@ -56,13 +57,13 @@ typedef struct arrays_s
 	char	cc;
 }	t_arrays;
 
-typedef struct wall_s
+typedef struct wwall_s
 {
 	char	*we;
 	char	*ea;
 	char	*no;
 	char	*so;
-}	t_wall;
+}	t_wwall;
 
 typedef struct colors_s
 {
@@ -90,7 +91,7 @@ typedef struct validate_s
 	t_map			map;
 	t_colors		colors;
 	t_hero_position	hero;
-	t_wall			wall;
+	t_wwall			wall;
 }	t_validate;
 
 /*------------validation.c----------------------*/
