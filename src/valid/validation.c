@@ -16,13 +16,17 @@ void	validate_free(t_arrays *ar)
 {
 	free(ar->colors[0]);
 	free(ar->colors[1]);
+	free(ar->colors);
 	free(ar->textures[0]);
 	free(ar->textures[1]);
 	free(ar->textures[2]);
 	free(ar->textures[3]);
+	free(ar->textures);
 	ar->ii = -1;
 	while (++(ar->ii) < ar->map_height)
 		free(ar->map[ar->ii]);
+	free(ar->map[ar->ii]);
+	free(ar->map[ar->ii]);
 	free(ar->map);
 	free(ar->str);
 }

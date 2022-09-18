@@ -36,19 +36,6 @@ void	map_normalize(t_arrays *ar)
 	}
 }
 
-void	map_print(t_arrays *ar)
-{
-	ar->ii = -1;
-	ft_putendl_fd("\n----MAP_START-", 1);
-	while (++(ar->ii) < ar->map_height)
-	{
-		ft_putchar_fd('|', 1);
-		ft_putstr_fd(ar->map[ar->ii], 1);
-		ft_putendl_fd("|", 1);
-	}
-	ft_putendl_fd("----MAP_END---", 1);
-}
-
 int	check_map_quadro(t_arrays *ar)
 {
 	size_t	len;

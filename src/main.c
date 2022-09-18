@@ -6,7 +6,7 @@
 /*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 16:18:26 by schung            #+#    #+#             */
-/*   Updated: 2022/09/18 02:10:26 by schung           ###   ########.fr       */
+/*   Updated: 2022/09/18 15:45:39 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	init_data(t_data *data, t_validate *val)
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
 	if (data->img.img_ptr == NULL)
 	{
-		ft_putstr_fd("Failure of creating image pointer\n", 2);
+		ft_putstr_fd("FAILURE_OF_Failure of creating image pointer\n", 2);
 		exit_game(data, EXIT_FAILURE);
 	}
 	if (get_textures(data, val) == EXIT_FAILURE)
@@ -80,11 +80,6 @@ int	main(int argc, char **argv)
 
 	start_init(&data);
 	val = validate(argv, argc);
-	//free(&(val->map));
-	while (42)
-	{
-		
-	}
 	data.map = &(val->map);
 	set_player_position(&data, &(val->hero));
 	i = 0;

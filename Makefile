@@ -6,7 +6,7 @@
 #    By: schung <schung@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/31 15:54:32 by tblaase           #+#    #+#              #
-#    Updated: 2022/09/17 04:57:55 by schung           ###   ########.fr        #
+#    Updated: 2022/09/18 16:30:11 by schung           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC			=	gcc
 
 FLAGS		=	-Wall -Wextra -Werror
 
-SRC_DIR		=	src/
+SRC_DIR		=	./src/
 VAL_DIR		=	src/valid/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
@@ -41,7 +41,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(LINK) -lm -o $(NAME)
 	@echo "$(GREEN)Finished [$(NAME)]$(RESET)"
 
-$(OBJ_DIR)%.o:$(SRC_DIR)%.c 
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
 	@echo "$(YELLOW)Compiling [$@]...$(RESET)"
 	@$(CC) $(FLAGS) -I $(LIBMLX_DIR) -I $(LIBFT_DIR) -I $(INC_DIR) -o $@ -c $<
