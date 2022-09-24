@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kthucydi <kthucydi@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: schung <schung@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/14 09:38:26 by kthucydi          #+#    #+#             */
-/*   Updated: 2022/09/14 09:38:26 by kthucydi         ###   ########.fr       */
+/*   Created: 2022/09/24 19:37:32 by schung            #+#    #+#             */
+/*   Updated: 2022/09/24 19:37:32 by schung           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
