@@ -1,6 +1,11 @@
 ## cub3D
 Inspired by Wolfenstein 3D
 
+## Run
+After compilation with Makefile you should run executable file with map location.
+For instance: 
+# ./cub3D maps/42.cub
+
 
 ## Resources
 
